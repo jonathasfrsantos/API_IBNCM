@@ -1,6 +1,7 @@
 package com.jonathasfrsaint.API_IBNCM.services;
 
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -94,6 +95,36 @@ public class TransactionService {
 		}
 		
 	}
+	
+	public List<TransactionDTO> findTithesListByDateInterval(LocalDate start_date, LocalDate end_date) {
+		List<Transaction> result = transactionRepository.tithesTable(start_date, end_date);
+
+		List<TransactionDTO> dto = result.stream().map((x) -> DTOFactory.createDTO(x)).collect(Collectors.toList());
+
+		return dto;
+
+	}
+
+	public List<TransactionDTO> findExpenseListByDateInterval(LocalDate start_date, LocalDate end_date) {
+		List<Transaction> result = transactionRepository.expensesTableGroupByFinality(start_date, end_date);
+
+		List<TransactionDTO> dto = result.stream().map((x) -> DTOFactory.createDTO(x)).collect(Collectors.toList());
+
+		return dto;
+
+	}
+	
+	public List<TransactionDTO> findOffersListByDateInterval(LocalDate start_date, LocalDate end_date) {
+		List<Transaction> result = transactionRepository.OffersTable(start_date, end_date);
+
+		List<TransactionDTO> dto = result.stream().map((x) -> DTOFactory.createDTO(x)).collect(Collectors.toList());
+
+		return dto;
+
+	}
+	
+	
+	
 	
 	public void delete(Long id) {
 		try {

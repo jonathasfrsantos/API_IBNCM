@@ -1,12 +1,16 @@
 package com.jonathasfrsaint.API_IBNCM.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,8 +20,12 @@ public class Finality implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+	private Long id_finality;
 	private String description;
+	
+	@OneToMany(mappedBy = "finality")
+	@JsonIgnore
+	private List<Transaction> transactions;
 	
 	
 	public Finality () {
@@ -25,20 +33,20 @@ public class Finality implements Serializable {
 	}
 
 
-	public Finality(Long id, String description) {
+	public Finality(Long id_finality, String description) {
 
-		this.id = id;
+		this.id_finality = id_finality;
 		this.description = description;
 	}
 
 
 	public Long getId() {
-		return id;
+		return id_finality;
 	}
 
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long id_finality) {
+		this.id_finality = id_finality;
 	}
 
 
@@ -50,11 +58,15 @@ public class Finality implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public List<Transaction> getTransactions(){
+		return transactions;
+	}
 
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, id);
+		return Objects.hash(description, id_finality);
 	}
 
 
@@ -67,7 +79,7 @@ public class Finality implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Finality other = (Finality) obj;
-		return Objects.equals(description, other.description) && Objects.equals(id, other.id);
+		return Objects.equals(description, other.description) && Objects.equals(id_finality, other.id_finality);
 	}
 	
 	

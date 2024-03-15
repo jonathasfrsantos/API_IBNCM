@@ -13,21 +13,21 @@ public class TransactionDTO {
 	private BigDecimal expense;
 	private String historic;
 	private String finality;
-	private String bankCash;
+	private String bank_cash;
 		
 	public TransactionDTO() {
 		
 	}
 
 	public TransactionDTO(Long id, LocalDate transactionDate, BigDecimal revenue, BigDecimal expense, String historic,
-			Finality finality, String bankCash) {
+			Finality finality, String bank_cash) {
 		this.id = id;
 		this.transactionDate = transactionDate;
 		this.revenue = revenue;
 		this.expense = expense;
 		this.historic = historic;
 		this.finality = finality.getDescription();
-		this.bankCash = bankCash;
+		this.bank_cash = bank_cash;
 	}
 
 
@@ -92,12 +92,12 @@ public class TransactionDTO {
 
 
 	public String getBankCash() {
-		return bankCash;
+		return bank_cash;
 	}
 
 
-	public void setBankCash(String bankCash) {
-		this.bankCash = bankCash;
+	public void setBankCash(String bank_cash) {
+		this.bank_cash = bank_cash;
 	}
 	
 	
